@@ -15,7 +15,7 @@ class SimpleButton extends StatelessWidget {
       child: MaterialButton(
         onPressed: onPressed,
         minWidth: 200.0,
-        height: 42.0,
+        height: 55.0,
         child: Text(
           text,
           style: TextStyle(color: Colors.white, fontSize: 16.0),

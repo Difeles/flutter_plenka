@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:plenka/screens/home_screen.dart';
 import 'package:plenka/screens/singup_screen.dart';
 import 'package:plenka/widgets/simple_button.dart';
+import 'package:plenka/widgets/text_field.dart';
 
 class LoginSceen extends StatefulWidget {
   const LoginSceen({super.key});
@@ -18,16 +19,25 @@ class LoginSceen extends StatefulWidget {
 }
 
 class _LoginSceenState extends State<LoginSceen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   String? email;
   String? password;
   final _auth = FirebaseAuth.instance;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Padding(
+          child: Container(
         padding: EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -36,19 +46,19 @@ class _LoginSceenState extends State<LoginSceen> {
             Flexible(
               child: Image.asset(
                 'images/4776016.jpg',
-                height: 350.0,
+                height: 320.0,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50.0,
             ),
-            Container(
-              height: 350.0,
+            SizedBox(
+              height: 430.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
+                  const Text(
                     'Вход',
                     textAlign: TextAlign.start,
                     style: TextStyle(
@@ -56,28 +66,28 @@ class _LoginSceenState extends State<LoginSceen> {
                       fontSize: 30,
                     ),
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Почта', icon: Icon(Icons.alternate_email)),
-                    onChanged: (value) => email = value,
+                  TextFieldInput(
+                    hintText: 'Почта',
+                    textInputType: TextInputType.emailAddress,
+                    controller: _emailController,
                   ),
-                  TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Пароль', icon: Icon(Icons.lock)),
-                    onChanged: (value) => password = value,
+                  TextFieldInput(
+                    hintText: 'Пароль',
+                    textInputType: TextInputType.text,
+                    controller: _passwordController,
+                    isPassword: true,
                   ),
-                  Text(
-                    'Забыл пароль?',
-                    textAlign: TextAlign.end,
-                    style: TextStyle(fontSize: 16.0),
-                  ),
+                  // Text('Забыл пароль?', textAlign: TextAlign.end, style: TextStyle(fontSize: 16.0),), Восстановление аккаунта
                   SimpleButton(
                     text: "Войти",
                     onPressed: () async {
                       if (email != null && password != null) {
+                        final navigator = Navigator.pushReplacementNamed(
+                            context, HomeScreen.id);
                         try {
                           final user = await _auth.signInWithEmailAndPassword(
                               email: email!, password: password!);
+                          if (!mounted) return;
                           Navigator.pushReplacementNamed(
                               context, HomeScreen.id);
                         } catch (e) {
@@ -85,6 +95,9 @@ class _LoginSceenState extends State<LoginSceen> {
                         }
                       }
                     },
+                  ),
+                  const SizedBox(
+                    height: 50.0,
                   ),
                   TextButton(
                       onPressed: () =>
