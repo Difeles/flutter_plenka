@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769952124061",
+    "project_id": "kitten-87b87",
+    "storage_bucket": "kitten-87b87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769952124061:android:1c518cfdca085f434e1874",
+        "android_client_info": {
+          "package_name": "com.example.plenka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769952124061-ksphvn5ncb6qli3u8so0dk0ic7uaj151.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyF6Q0HWuwXAIm7sRfH1GszIf26Ygcw7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769952124061-ksphvn5ncb6qli3u8so0dk0ic7uaj151.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
